@@ -16,7 +16,7 @@
 	margin: 15px 15px 15px 15px;
 }
 
-.button {
+button {
 	margin:auto;
 	display: inline-block;
 	border: 1px solid black;
