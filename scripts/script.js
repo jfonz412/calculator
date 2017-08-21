@@ -4,6 +4,7 @@ var joinedInputNumbers = [];
 var operator;
 var operatorInputs = [];
 var total = 0;
+var done = false;
 
 $(document).ready(function(){
 	numberButton();
@@ -17,11 +18,17 @@ $(document).ready(function(){
 /** Button Functions **/
 function numberButton(){ 
 	$(".num").click(function(){
+		if(done){
+			clearDisplay();
+			done = !done;
+		}
 		console.log("Button " + $(this).val() + " clicked!");
 		input = $(this).val();
 		console.log("Input is " + input);
 		inputNums.push(input);
 		console.log("inputNums are " + inputNums);
+
+		display(input);
 	})
 }
 
@@ -32,6 +39,9 @@ function operatorButton(){
 		console.log("Current operator is: " + operator);
 		operatorInputs.push(operator);
 		console.log("operatorInputs are " + operatorInputs);
+		done = !done;
+		clearDisplay();
+		display(operator);
 	})
 }
 
@@ -63,16 +73,31 @@ function equalButton(){
 			}
 			i++;
 		}
-		clearAllInput();
 		console.log("Final total is " + total);
 		console.log("Calulations complete");
+		done = !done;
+		clearAllInput();
+		clearDisplay();
+		display(total);
+		// User can continue working with total
+		inputNums.push(total);
 	})
 }
 
 function allClearButton(){
 	$("#ac").click(function(){
+		clearDisplay();
 		clearAllInput();
 	})
+}
+
+/** Display Functions **/
+function display(input){
+	$("#screen").append("<div class='text'>" + input + "</div>");
+}
+
+function clearDisplay(){
+	$(".text").remove();
 }
 
 /** Helper Functions **/
@@ -89,7 +114,7 @@ function joinInputNumbers(){
 	}
 }
 
-// Convert string inputs to ints
+// Convert string inputs to integerss
 function convertNums(){
 	for(i=0;i<joinedInputNumbers.length;i++){
 		joinedInputNumbers[i] = parseInt(joinedInputNumbers[i]);
@@ -104,3 +129,4 @@ function clearAllInput(){
 	operatorInputs = [];
 	console.log("Clearing all input");
 }
+
