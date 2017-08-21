@@ -6,11 +6,13 @@ var operator;
 $(document).ready(function(){
 	numberButton();
 	operatorButton();
+	equalButton();
+	allClearButton();
 });
 
 /************ FUNCTIONS *************/
 
-// Button Functions
+/** Button Functions **/
 function numberButton(){ 
 	$(".num").click(function(){
 		console.log("Button " + $(this).val() + " clicked!");
@@ -29,32 +31,79 @@ function operatorButton(){
 	})
 }
 
-function joinInputNumbers(){
-	x = inputNums.join("");
-	joinedInputNumbers.push(x);
-	inputNums = [];
-	console.log("Operator button pressed");
-	console.log("joinedInputNumbers are " + joinedInputNumbers);
+function equalButton(){
+	$("#equal").click(function(){
+		joinInputNumbers();
+		switch(operator) {
+			case "+":
+				add();
+				break;
+			case "-":
+				subtract();
+				break;
+			case "*":
+				multiply();
+				break;
+			case "/":
+				divide();
+				break;
+			default:
+				console.log("Invalid entry");
+		} 
+	})
 }
 
-// Math Functions
-function add(input){
+function allClearButton(){
+	$("#ac").click(function(){
+		clearAllInput();
+	})
+}
 
+/** Helper Functions **/
+function joinInputNumbers(){
+	if(inputNums) {
+		x = inputNums.join("");
+		joinedInputNumbers.push(x);
+		inputNums = [];
+		console.log("Operator button pressed");
+		console.log("joinedInputNumbers are " + joinedInputNumbers);
+	} else {
+		console.log("No inputNums");
+	}
+
+}
+
+function clearAllInput(){
+	input = null;
+	operator = null;
+	inputNums = [];
+	joinedInputNumbers = [];
+	console.log("Clearing all input");
+}
+
+/** Math Functions **/
+function add(input){
+	console.log("Adding");
+	var total = 0;
+	for(var i=0;i<joinedInputNumbers.length;i++) {
+		total += Number(joinedInputNumbers[i]);
+	}
+	console.log("Sum is " + total);
+	clearAllInput();
+	return total;
 }
 
 function subtract(input){
-	
+	console.log("Subtracting");	
 }
 
 function multiply(input){
-	
+	console.log("Multiplying");	
 }
 
 function divide(input){
-	
+	console.log("Dividing");	
 }
-
-
 
 
 
