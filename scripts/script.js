@@ -80,13 +80,20 @@ function joinInputNumbers(){
 	if(inputNums) {
 		x = inputNums.join("");
 		joinedInputNumbers.push(x);
+		convertNums();
 		inputNums = [];
 		console.log("Operator button pressed");
 		console.log("joinedInputNumbers are " + joinedInputNumbers);
 	} else {
 		console.log("No inputNums");
 	}
+}
 
+// Convert string inputs to ints
+function convertNums(){
+	for(i=0;i<joinedInputNumbers.length;i++){
+		joinedInputNumbers[i] = parseInt(joinedInputNumbers[i]);
+	}
 }
 
 function clearAllInput(){
