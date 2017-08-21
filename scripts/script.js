@@ -1,7 +1,9 @@
-var input; // will be pushed to inputNums
+var input;
 var inputNums = []; 
 var joinedInputNumbers = [];
 var operator;
+var operatorInputs = [];
+var total = 0;
 
 $(document).ready(function(){
 	numberButton();
@@ -28,28 +30,42 @@ function operatorButton(){
 		joinInputNumbers();
 		operator = $(this).val();
 		console.log("Current operator is: " + operator);
+		operatorInputs.push(operator);
+		console.log("operatorInputs are " + operatorInputs);
 	})
 }
 
 function equalButton(){
 	$("#equal").click(function(){
 		joinInputNumbers();
-		switch(operator) {
-			case "+":
-				add();
-				break;
-			case "-":
-				subtract();
-				break;
-			case "*":
-				multiply();
-				break;
-			case "/":
-				divide();
-				break;
-			default:
-				console.log("Invalid entry");
-		} 
+		var i = 0;
+		total = joinedInputNumbers[i];
+		while(i<operatorInputs.length){
+			switch(operatorInputs[i]){
+				case "+":
+					total = joinedInputNumbers[i+1] + total;
+					console.log("Adding...Current total is " + total);
+					break;
+				case "-":
+					total -= joinedInputNumbers[i+1];
+					console.log("Subtracting...Current total is " + total);
+					break;
+				case "*":
+					total *= joinedInputNumbers[i+1];
+					console.log("Multiplying...Current total is " + total);
+					break;
+				case "/":
+					total /= joinedInputNumbers[i+1];
+					console.log("Dividing...Current total is " + total);
+					break;
+				default:
+					console.log("Invalid input");
+			}
+			i++;
+		}
+		clearAllInput();
+		console.log("Final total is " + total);
+		console.log("Calulations complete");
 	})
 }
 
@@ -78,41 +94,6 @@ function clearAllInput(){
 	operator = null;
 	inputNums = [];
 	joinedInputNumbers = [];
+	operatorInputs = [];
 	console.log("Clearing all input");
-}
-
-/** Math Functions **/
-function add(input){
-	console.log("Adding");
-	var total = 0;
-	for(var i=0;i<joinedInputNumbers.length;i++) {
-		total += Number(joinedInputNumbers[i]);
-	}
-	console.log("Sum is " + total);
-	clearAllInput();
-	return total;
-}
-
-function subtract(input){
-	console.log("Subtracting");	
-}
-
-function multiply(input){
-	console.log("Multiplying");	
-}
-
-function divide(input){
-	console.log("Dividing");	
-}
-
-
-
-//Not currently used
-function drawButtons(){
-	for(var i=0;i<4;i++){
-		$('.calculator').append('<div class="row"></div>');
-	}
-	for(var i=0;i<4;i++){
-		$('.row').append('<div class="button"></div>');
-	}
 }
