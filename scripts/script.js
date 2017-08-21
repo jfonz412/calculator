@@ -5,6 +5,7 @@ var operator;
 var operatorInputs = [];
 var total = 0;
 var done = false;
+var lastClicked;
 
 $(document).ready(function(){
 	numberButton();
@@ -27,19 +28,24 @@ function numberButton(){
 		console.log("Input is " + input);
 		inputNums.push(input);
 		console.log("inputNums are " + inputNums);
-
+		lastClicked = "number";
 		display(input);
 	})
 }
 
 function operatorButton(){
 	$(".operator").click(function(){
-		joinInputNumbers();
+		if(lastClicked === "operator"){
+			operatorInputs.pop();
+		} else {
+			joinInputNumbers();
+		}
 		operator = $(this).val();
 		console.log("Current operator is: " + operator);
 		operatorInputs.push(operator);
 		console.log("operatorInputs are " + operatorInputs);
 		done = !done;
+		lastClicked = "operator";
 		clearDisplay();
 		display(operator);
 	})
