@@ -1,30 +1,41 @@
 var input; // will be pushed to inputNums
 var inputNums = []; 
 var joinedInputNumbers = [];
+var operator;
 
 $(document).ready(function(){
-
+	numberButton();
+	operatorButton();
 });
 
 /************ FUNCTIONS *************/
 
-$(".num").click(function(){
-	console.log("Button " + $(this).val() + " clicked!");
-	input = $(this).val();
-	console.log("Input is " + input);
-	inputNums.push(input);
-	console.log("inputNums are " + inputNums);
-})
+// Button Functions
+function numberButton(){ 
+	$(".num").click(function(){
+		console.log("Button " + $(this).val() + " clicked!");
+		input = $(this).val();
+		console.log("Input is " + input);
+		inputNums.push(input);
+		console.log("inputNums are " + inputNums);
+	})
+}
 
-// Doesn't work yet, might need to rearrange things. 
-// Refer to sketchpad and github for guidance
-$(".operator").click(function(){
-	//this shoud trigger when something other than a number button is pressed
+function operatorButton(){
+	$(".operator").click(function(){
+		joinInputNumbers();
+		operator = $(this).val();
+		console.log("Current operator is: " + operator);
+	})
+}
+
+function joinInputNumbers(){
 	x = inputNums.join("");
 	joinedInputNumbers.push(x);
+	inputNums = [];
 	console.log("Operator button pressed");
 	console.log("joinedInputNumbers are " + joinedInputNumbers);
-})
+}
 
 // Math Functions
 function add(input){
