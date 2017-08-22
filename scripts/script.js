@@ -123,7 +123,7 @@ function joinInputNumbers(){
 // Convert string inputs to integerss
 function convertNums(){
 	for(i=0;i<joinedInputNumbers.length;i++){
-		joinedInputNumbers[i] = parseInt(joinedInputNumbers[i]);
+		joinedInputNumbers[i] = Number(joinedInputNumbers[i]);
 	}
 }
 
