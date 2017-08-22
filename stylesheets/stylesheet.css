@@ -24,6 +24,7 @@
 .text {
 	display: inline;
 	font-family: 'Saira', sans-serif;
+	margin-left: 10px;
 }
 
 /**Buttons**/
