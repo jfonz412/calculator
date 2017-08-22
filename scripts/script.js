@@ -12,6 +12,7 @@ $(document).ready(function(){
 	operatorButton();
 	equalButton();
 	allClearButton();
+	mysteryButton();
 });
 
 /************ FUNCTIONS *************/
@@ -94,6 +95,15 @@ function allClearButton(){
 	$("#ac").click(function(){
 		clearDisplay();
 		clearAllInput();
+	})
+}
+
+function mysteryButton(){
+	$("#mystery-button").click(function(){
+		message = "BY JIMMY";
+		clearDisplay();
+		clearAllInput();
+		display(message);
 	})
 }
 
